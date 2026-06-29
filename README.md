@@ -21,7 +21,7 @@ Casper EdgeGuard is designed to bring heavy-lifting enterprise compliance logic 
 
 Open your Termux terminal interface and initialize your system dependencies:
 
-Update native packages and core repositories
+Update native packages and core repositories:
 ```pkg update && pkg upgrade -y```
 
 Install Node.js runtime and Git:
@@ -35,6 +35,7 @@ Verify system environment versions:
 
 2. Repository Cloning & Installation 
 ​
+
 Clone the public repository directly into your Termux environment and install the required dependencies:
 
 Clone the open-source repository:
@@ -47,8 +48,10 @@ Install required node modules and dependency trees:
 ```npm install```
 
 3. Local Execution & Expo Go Preview
-​Launch the native development server macro
+​
+Launch the native development server macro
 
 Start the Expo development server:
 ```npm start```
+
 How to preview: Once the server starts, a QR code will generate directly in your terminal. Scan this QR code using the free Expo Go app (available on the App Store) to run the full, localized agent UI on your device instantly. You can also press w to spin it up in your local mobile browser.
