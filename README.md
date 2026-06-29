@@ -15,39 +15,40 @@ State Consensus Verification: It utilizes a resilient Web RPC Gateway to read th
 On-Device Termux Deployment & Quick Start
 
 Casper EdgeGuard is designed to bring heavy-lifting enterprise compliance logic straight to the client edge. Follow these steps to spin up the local execution container and the Metro bundler loop within an isolated terminal environment:
+(NOTE: To install Termux on mobile, we recommend that you install F-Droid first and install Termux by Tarek Sander through the F-Droid app)
 
 1. Environment Setup & Core Dependencies
 
 Open your Termux terminal interface and initialize your system dependencies:
-```bash```
 
 Update native packages and core repositories
 ```pkg update && pkg upgrade -y```
 
-Install Node.js runtime environment:
-```pkg install nodejs -y```
+Install Node.js runtime and Git:
+```pkg install nodejs git -y```
 
- Verify system environment versions:
+Optional but recommended:
+```npm install -g npm@latest```
+
+Verify system environment versions:
 ```node -v && npm -v```
 
-2. Repository Initialization & Local Execution
-​Navigate to your local repository directory and spin up the native on-device compilation layer:
+2. Repository Cloning & Installation 
+​
+Clone the public repository directly into your Termux environment and install the required dependencies:
+
+Clone the open-source repository:
+```git clone https://github.com/obednc-glitch/casper-edgeguard.git```
 
 Move into the project's root development workspace:
-```cd /data/data/com.termux/files/home/casper-edgeguard```
+```cd casper-edgeguard```
 
-Verify files and local asset configurations:
-```ls -la```
+Install required node modules and dependency trees:
+```npm install```
 
-Launch the native development server macro:
+3. Local Execution & Expo Go Preview
+​Launch the native development server macro
+
+Start the Expo development server:
 ```npm start```
-
-3. Core Script Configuration (package.json)
-
-​The npm start execution maps directly to our underlying core scripting engine, printing the Expo Go framework configuration straight to your console stream:
-```"scripts": {
-  "start": "expo start",
-  "android": "expo start --android",
-  "web": "expo start --web"
-}
-```
+How to preview: Once the server starts, a QR code will generate directly in your terminal. Scan this QR code using the free Expo Go app (available on the App Store) to run the full, localized agent UI on your device instantly. You can also press w to spin it up in your local mobile browser.
