@@ -210,3 +210,29 @@
 {"_e":"metro:client_log","_t":1782768205685,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
 {"_e":"metro:client_log","_t":1782768205687,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
 {"_e":"metro:client_log","_t":1782768209512,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"root:init","_t":1782774321203,"format":"v0-jsonl","version":"56.1.16"}
+{"_e":"env:mode","_t":1782774321207,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1782774321224,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1782774322456,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../../../app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1782774324099,"serverRoot":"../../..","projectRoot":"../../..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"metro:server_log","_t":1782774324818,"level":"error","data":["An unknown error occurred while installing React Native DevTools. Details:\n\nCannot read properties of undefined (reading 'arm64')"]}
+{"_e":"metro:instantiate","_t":1782774336921,"atlas":false,"workers":6,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1782774353352,"id":"1","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1782774353354,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1782774353376,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1782774353514,"id":"1","progress":0.09,"total":10,"current":3}
+{"_e":"metro:bundling:progress","_t":1782774353613,"id":"1","progress":0.09,"total":49,"current":10}
+{"_e":"metro:bundling:progress","_t":1782774353747,"id":"1","progress":0.09,"total":65,"current":13}
+{"_e":"metro:bundling:progress","_t":1782774353859,"id":"1","progress":0.09,"total":102,"current":18}
+{"_e":"metro:bundling:progress","_t":1782774353962,"id":"1","progress":0.10260009765625,"total":128,"current":41}
+{"_e":"metro:bundling:progress","_t":1782774354069,"id":"1","progress":0.2644897959183673,"total":140,"current":72}
+{"_e":"metro:bundling:progress","_t":1782774354169,"id":"1","progress":0.5261356873636184,"total":142,"current":103}
+{"_e":"metro:bundling:progress","_t":1782774354270,"id":"1","progress":0.5673806712767752,"total":154,"current":116}
+{"_e":"metro:bundling:progress","_t":1782774354372,"id":"1","progress":0.7417889003976076,"total":173,"current":149}
+{"_e":"metro:bundling:progress","_t":1782774354474,"id":"1","progress":0.7550428881138654,"total":206,"current":179}
+{"_e":"metro:bundling:progress","_t":1782774354576,"id":"1","progress":0.8520710059171599,"total":234,"current":216}
+{"_e":"metro:bundling:progress","_t":1782774355010,"id":"1","progress":0.976425190207627,"total":253,"current":250}
+{"_e":"metro:bundling:done","_t":1782774355191,"id":"1","total":253,"ms":1838.62802}
+{"_e":"metro:client_log","_t":1782774355738,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1782774355743,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1782774360704,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
