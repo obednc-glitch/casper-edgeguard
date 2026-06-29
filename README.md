@@ -19,34 +19,35 @@ Casper EdgeGuard is designed to bring heavy-lifting enterprise compliance logic 
 1. Environment Setup & Core Dependencies
 
 Open your Termux terminal interface and initialize your system dependencies:
-```bash
+```bash```
 
 Update native packages and core repositories
-pkg update && pkg upgrade -y
+```pkg update && pkg upgrade -y```
 
 Install Node.js runtime environment:
-pkg install nodejs -y
+```pkg install nodejs -y```
 
  Verify system environment versions:
-node -v && npm -v
+```node -v && npm -v```
 
 2. Repository Initialization & Local Execution
 ​Navigate to your local repository directory and spin up the native on-device compilation layer:
 
 Move into the project's root development workspace:
-cd /data/data/com.termux/files/home/casper-edgeguard
+```cd /data/data/com.termux/files/home/casper-edgeguard```
 
 Verify files and local asset configurations:
-ls -la
+```ls -la```
 
 Launch the native development server macro:
-npm start
+```npm start```
 
 3. Core Script Configuration (package.json)
 
 ​The npm start execution maps directly to our underlying core scripting engine, printing the Expo Go framework configuration straight to your console stream:
-"scripts": {
+```"scripts": {
   "start": "expo start",
   "android": "expo start --android",
   "web": "expo start --web"
 }
+```
