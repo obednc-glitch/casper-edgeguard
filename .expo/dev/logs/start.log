@@ -236,3 +236,70 @@
 {"_e":"metro:client_log","_t":1782774355738,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
 {"_e":"metro:client_log","_t":1782774355743,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
 {"_e":"metro:client_log","_t":1782774360704,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"root:init","_t":1782775810486,"format":"v0-jsonl","version":"56.1.16"}
+{"_e":"env:mode","_t":1782775810490,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1782775810501,"mode":"development","files":[],"env":{}}
+{"_e":"root:init","_t":1782776179457,"format":"v0-jsonl","version":"56.1.16"}
+{"_e":"env:mode","_t":1782776179460,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1782776179472,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1782776180707,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../../../app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1782776182355,"serverRoot":"../../..","projectRoot":"../../..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"metro:server_log","_t":1782776183162,"level":"error","data":["An unknown error occurred while installing React Native DevTools. Details:\n\nCannot read properties of undefined (reading 'arm64')"]}
+{"_e":"metro:instantiate","_t":1782776195245,"atlas":false,"workers":4,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1782776208578,"id":"1","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1782776208584,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1782776208668,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1782776208779,"id":"1","progress":0.04000000000000001,"total":4,"current":2}
+{"_e":"metro:bundling:progress","_t":1782776208881,"id":"1","progress":0.04432132963988919,"total":38,"current":8}
+{"_e":"metro:bundling:progress","_t":1782776208982,"id":"1","progress":0.15378700499807765,"total":51,"current":20}
+{"_e":"metro:bundling:progress","_t":1782776209101,"id":"1","progress":0.5166015625,"total":64,"current":46}
+{"_e":"metro:bundling:progress","_t":1782776209203,"id":"1","progress":0.6676085663295657,"total":82,"current":67}
+{"_e":"metro:bundling:progress","_t":1782776209302,"id":"1","progress":0.6892132431470275,"total":106,"current":88}
+{"_e":"metro:bundling:progress","_t":1782776209403,"id":"1","progress":0.6892132431470275,"total":130,"current":105}
+{"_e":"metro:bundling:progress","_t":1782776209503,"id":"1","progress":0.8549915556389567,"total":146,"current":135}
+{"_e":"metro:bundling:progress","_t":1782776209882,"id":"1","progress":0.8549915556389567,"total":155,"current":140}
+{"_e":"metro:bundling:progress","_t":1782776209986,"id":"1","progress":0.9179246297823515,"total":167,"current":160}
+{"_e":"metro:bundling:progress","_t":1782776210087,"id":"1","progress":0.9888580256546299,"total":179,"current":178}
+{"_e":"metro:bundling:progress","_t":1782776212165,"id":"1","progress":0.999,"total":179,"current":179}
+{"_e":"metro:bundling:progress","_t":1782776212287,"id":"1","progress":0.999,"total":200,"current":185}
+{"_e":"metro:bundling:progress","_t":1782776212387,"id":"1","progress":0.999,"total":247,"current":197}
+{"_e":"metro:bundling:progress","_t":1782776212489,"id":"1","progress":0.999,"total":248,"current":229}
+{"_e":"metro:bundling:progress","_t":1782776212593,"id":"1","progress":0.999,"total":258,"current":248}
+{"_e":"metro:bundling:done","_t":1782776212766,"id":"1","total":258,"ms":4186.49677}
+{"_e":"metro:bundling:started","_t":1782776212960,"id":"2","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1782776212961,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1782776213018,"id":"2","total":1,"ms":57.752552}
+{"_e":"metro:client_log","_t":1782776213442,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1782776213445,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1782776213607,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1782776213609,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1782776257999,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"root:init","_t":1782777498850,"format":"v0-jsonl","version":"56.1.16"}
+{"_e":"env:mode","_t":1782777498854,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1782777498865,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1782777500092,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../../../app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1782777501757,"serverRoot":"../../..","projectRoot":"../../..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"metro:server_log","_t":1782777502635,"level":"error","data":["An unknown error occurred while installing React Native DevTools. Details:\n\nCannot read properties of undefined (reading 'arm64')"]}
+{"_e":"metro:instantiate","_t":1782777515229,"atlas":false,"workers":4,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1782777536693,"id":"1","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1782777536696,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1782777536739,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1782777536857,"id":"1","progress":0.16000000000000003,"total":10,"current":4}
+{"_e":"metro:bundling:progress","_t":1782777536957,"id":"1","progress":0.3502707205331112,"total":49,"current":29}
+{"_e":"metro:bundling:progress","_t":1782777537057,"id":"1","progress":0.6173469387755102,"total":70,"current":55}
+{"_e":"metro:bundling:progress","_t":1782777537164,"id":"1","progress":0.7009194159004868,"total":86,"current":72}
+{"_e":"metro:bundling:progress","_t":1782777537263,"id":"1","progress":0.7009194159004868,"total":116,"current":90}
+{"_e":"metro:bundling:progress","_t":1782777537368,"id":"1","progress":0.7071280991735538,"total":132,"current":111}
+{"_e":"metro:bundling:progress","_t":1782777537469,"id":"1","progress":0.8252826820075382,"total":142,"current":129}
+{"_e":"metro:bundling:progress","_t":1782777537855,"id":"1","progress":0.8252826820075382,"total":155,"current":138}
+{"_e":"metro:bundling:progress","_t":1782777537956,"id":"1","progress":0.9888580256546299,"total":179,"current":178}
+{"_e":"metro:bundling:progress","_t":1782777540206,"id":"1","progress":0.999,"total":179,"current":179}
+{"_e":"metro:bundling:progress","_t":1782777540309,"id":"1","progress":0.999,"total":199,"current":183}
+{"_e":"metro:bundling:progress","_t":1782777540412,"id":"1","progress":0.999,"total":242,"current":189}
+{"_e":"metro:bundling:progress","_t":1782777540514,"id":"1","progress":0.999,"total":251,"current":212}
+{"_e":"metro:bundling:progress","_t":1782777540622,"id":"1","progress":0.999,"total":251,"current":242}
+{"_e":"metro:bundling:progress","_t":1782777540722,"id":"1","progress":0.999,"total":261,"current":261}
+{"_e":"metro:bundling:done","_t":1782777540822,"id":"1","total":261,"ms":4127.949322}
+{"_e":"metro:client_log","_t":1782777541402,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1782777541408,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1782777592190,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
