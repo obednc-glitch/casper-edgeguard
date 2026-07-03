@@ -1,0 +1,59 @@
+name: Build Odra Contract WASM
+
+# Compiles compliance-registry to WASM on a real Linux runner with full Rust
+# tooling, so nothing needs to be installed on the phone at all. Download the
+# compiled .wasm from the Actions run's "Artifacts" section when it finishes
+# (usually 3-6 minutes), then deploy it from Termux using
+# server/contractDeploy.js - that part only needs Node, already installed.
+
+on:
+  push:
+    paths:
+      - 'contracts/compliance-registry/**'
+      - '.github/workflows/build-contract.yml'
+  workflow_dispatch: {} # lets you trigger a build manually from the Actions tab, no push needed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Install cargo-odra
+        run: cargo install cargo-odra
+
+      - name: Scaffold a fresh Odra project (gets current, correct boilerplate)
+        run: |
+          cd contracts
+          cargo odra new --name compliance_registry_scaffold
+          # Overlay our actual contract logic onto the freshly-scaffolded
+          # project so we always build against whatever bin/build-script
+          # boilerplate the installed cargo-odra version currently expects,
+          # instead of hand-maintained files that could drift out of date.
+          cp compliance-registry/src/lib.rs compliance_registry_scaffold/src/lib.rs
+
+      - name: Build WASM
+        run: |
+          cd contracts/compliance_registry_scaffold
+          cargo odra build
+
+      - name: Locate and collect compiled WASM files
+        run: |
+          mkdir -p artifacts
+          find contracts/compliance_registry_scaffold -name "*.wasm" -exec cp {} artifacts/ \;
+          ls -la artifacts/
+          # NOTE: cargo-odra's exact output filename can vary by version -
+          # this uploads whatever .wasm files it produced rather than
+          # guessing one name. The contract wasm is usually the one NOT
+          # named *_schema.wasm - check file sizes/names in the artifact.
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: compliance-registry-wasm
+          path: artifacts/
+          retention-days: 30
