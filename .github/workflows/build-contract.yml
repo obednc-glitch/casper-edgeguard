@@ -31,6 +31,9 @@ jobs:
         run: |
           cd contracts
           cargo odra new --name compliance_registry_scaffold
+          echo "--- scaffold's original generated src/lib.rs (for reference if the build fails) ---"
+          cat compliance_registry_scaffold/src/lib.rs
+          echo "--- end of original scaffold lib.rs ---"
           # Overlay our actual contract logic onto the freshly-scaffolded
           # project so we always build against whatever bin/build-script
           # boilerplate the installed cargo-odra version currently expects,
