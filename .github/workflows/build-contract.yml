@@ -37,6 +37,17 @@ jobs:
           # instead of hand-maintained files that could drift out of date.
           cp compliance-registry/src/lib.rs compliance_registry_scaffold/src/lib.rs
 
+      - name: Ensure wasm32 target on the scaffold's own toolchain
+        run: |
+          cd contracts/compliance_registry_scaffold
+          # cargo-odra's scaffold pins its own toolchain (often nightly) via
+          # rust-toolchain.toml, separate from the stable toolchain set up
+          # above. Running rustup here, inside this directory, adds the
+          # wasm32 target to whichever toolchain that file actually
+          # activates - the earlier `targets: wasm32-unknown-unknown` only
+          # applied to the outer stable toolchain, not this one.
+          rustup target add wasm32-unknown-unknown
+
       - name: Build WASM
         run: |
           cd contracts/compliance_registry_scaffold
