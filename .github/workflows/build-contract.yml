@@ -31,9 +31,18 @@ jobs:
         run: |
           cd contracts
           cargo odra new --name compliance_registry_scaffold
-          echo "--- scaffold's original generated src/lib.rs (for reference if the build fails) ---"
-          cat compliance_registry_scaffold/src/lib.rs
-          echo "--- end of original scaffold lib.rs ---"
+          echo "=== FULL SCAFFOLD DIAGNOSTIC (for debugging build failures) ==="
+          echo "--- Cargo.toml ---"
+          cat compliance_registry_scaffold/Cargo.toml
+          echo "--- file tree ---"
+          find compliance_registry_scaffold -name "*.rs" -o -name "*.toml" | grep -v target
+          echo "--- contents of every .rs file ---"
+          for f in $(find compliance_registry_scaffold -name "*.rs" | grep -v target); do
+            echo ">>> $f <<<"
+            cat "$f"
+            echo ""
+          done
+          echo "=== END SCAFFOLD DIAGNOSTIC ==="
           # Overlay our actual contract logic onto the freshly-scaffolded
           # project so we always build against whatever bin/build-script
           # boilerplate the installed cargo-odra version currently expects,
