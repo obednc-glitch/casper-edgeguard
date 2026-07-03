@@ -52,13 +52,20 @@ jobs:
       - name: Ensure wasm32 target on the scaffold's own toolchain
         run: |
           cd contracts/compliance_registry_scaffold
-          # cargo-odra's scaffold pins its own toolchain (often nightly) via
-          # rust-toolchain.toml, separate from the stable toolchain set up
-          # above. Running rustup here, inside this directory, adds the
-          # wasm32 target to whichever toolchain that file actually
-          # activates - the earlier `targets: wasm32-unknown-unknown` only
-          # applied to the outer stable toolchain, not this one.
+          # If the scaffold pins an unqualified "nightly" (via
+          # rust-toolchain.toml), rustup resolves that to whatever the
+          # newest nightly is *today* - which can silently change wasm32/std
+          # build behavior between runs. Pin a specific, slightly older
+          # nightly known to work with this Odra version instead, if the
+          # scaffold's toolchain file allows override.
+          if [ -f rust-toolchain.toml ]; then
+            echo "--- scaffold's rust-toolchain.toml (before override) ---"
+            cat rust-toolchain.toml
+          fi
+          rustup toolchain install nightly-2025-10-01 --target wasm32-unknown-unknown --profile minimal
+          rustup override set nightly-2025-10-01
           rustup target add wasm32-unknown-unknown
+          rustc --version
 
       - name: Build WASM
         run: |
