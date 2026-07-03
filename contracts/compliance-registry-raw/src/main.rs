@@ -22,6 +22,16 @@
 // Odra build's own log, before it reached Odra's wasm-env crate). But this
 // is still a first real build attempt for this specific file - if it fails,
 // paste the exact CI error and we fix it from real data, same as before.
+//
+// UPDATE after first real build attempt: casper-contract's default
+// "no-std-helpers" feature ships its own panic handler using
+// `#[no_mangle] pub fn panic(...)` (in its internal no_std_handlers.rs) -
+// current Rust rejects that pattern on lang items ("cannot be used on
+// internal language items"). This is a real incompatibility in that crate
+// feature against current-ish nightly Rust, not something in our code.
+// Fixed by disabling default-features on casper-contract (Cargo.toml) and
+// providing our own panic handler + global allocator below, using the
+// modern #[panic_handler] attribute instead of the deprecated pattern.
 
 #![no_std]
 #![no_main]
@@ -30,6 +40,14 @@ extern crate alloc;
 
 use alloc::string::{String, ToString};
 use alloc::vec;
+
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+
+#[panic_handler]
+fn panic(_info: &core::panic::PanicInfo) -> ! {
+    core::arch::wasm32::unreachable()
+}
 
 use casper_contract::contract_api::{runtime, storage};
 use casper_contract::unwrap_or_revert::UnwrapOrRevert;
