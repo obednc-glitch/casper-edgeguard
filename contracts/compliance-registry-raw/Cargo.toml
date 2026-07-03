@@ -1,0 +1,18 @@
+[package]
+name = "compliance-registry-raw"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "contract"
+path = "src/main.rs"
+
+[dependencies]
+casper-contract = "5"
+casper-types = "5"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"

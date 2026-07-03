@@ -1,0 +1,37 @@
+name: Build Raw Casper Contract WASM
+
+on:
+  push:
+    paths:
+      - 'contracts/compliance-registry-raw/**'
+      - '.github/workflows/build-contract-raw.yml'
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust (toolchain pinned by rust-toolchain.toml in the contract folder)
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly-2025-10-01
+          targets: wasm32-unknown-unknown
+
+      - name: Build
+        run: |
+          cd contracts/compliance-registry-raw
+          cargo build --release --target wasm32-unknown-unknown
+
+      - name: Locate and collect compiled WASM
+        run: |
+          mkdir -p artifacts
+          find contracts/compliance-registry-raw/target/wasm32-unknown-unknown/release -maxdepth 1 -name "*.wasm" -exec cp {} artifacts/ \;
+          ls -la artifacts/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: compliance-registry-raw-wasm
+          path: artifacts/
+          retention-days: 30
