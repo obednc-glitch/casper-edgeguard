@@ -16,7 +16,6 @@
 // method name has changed, this is a small, mechanical fix, not a redesign.
 
 use odra::prelude::*;
-use odra::{Mapping, Var};
 
 #[odra::odra_type]
 pub struct CheckRecord {
