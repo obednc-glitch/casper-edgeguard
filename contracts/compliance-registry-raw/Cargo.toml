@@ -8,8 +8,17 @@ name = "contract"
 path = "src/main.rs"
 
 [dependencies]
-casper-contract = { version = "6", default-features = false }
-casper-types = "6"
+# Pulling directly from casper-node's dev branch, not crates.io - the
+# published casper-contract crate tops out at 5.1.1 (confirmed by a failed
+# build trying to require "^6", which doesn't exist on crates.io at all),
+# while casper-types has already published 6.x with the Entity-based types
+# this contract needs. cep18's current code needs those same types, so it's
+# almost certainly building against this same git source rather than a
+# crates.io release. If this exact path/branch is wrong, the next CI error
+# will show a "failed to load source" or similar - a clear, fixable signal,
+# not a guess.
+casper-contract = { git = "https://github.com/casper-network/casper-node", branch = "dev", default-features = false }
+casper-types = { git = "https://github.com/casper-network/casper-node", branch = "dev" }
 wee_alloc = "0.4"
 
 [profile.release]
