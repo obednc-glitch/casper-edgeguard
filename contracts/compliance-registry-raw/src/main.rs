@@ -2,36 +2,35 @@
 //
 // ComplianceRegistry - PRIVACY-PRESERVING DESIGN.
 //
-// Earlier versions of this contract stored the actual verdict, score, and
-// sanctions-clear flag on-chain, publicly readable by anyone. On reflection
-// (see the writeup in README.md), that's a bad idea for a real compliance
-// product: a public, permanent ledger is fundamentally incompatible with
-// data-deletion rights (GDPR "right to be forgotten" etc.), and it's a
-// specific irony for a *compliance* tool to create its own compliance
-// liability. It also leaked business intelligence (which assets/volumes a
-// platform is processing) to anyone reading the chain.
-//
-// This version stores ONLY a hash-commitment of the full compliance report
-// (already computed off-chain as `dataHash` in server/complianceEngine.js),
-// plus who recorded it and when. The full verdict, score, and sanctions
-// detail stay off-chain, in the PDF report and app UI, access-controlled
-// like any normal business data. Anyone who already holds a copy of the
-// full report (the asset owner, a regulator, an auditor you've shared it
-// with) can hash it themselves and compare against what's on-chain to
-// verify it's authentic and hasn't been altered - without the chain itself
-// revealing anything to an arbitrary public reader.
+// Stores only a hash-commitment of each compliance report on-chain (plus
+// who recorded it and when) - never the actual verdict, score, or
+// sanctions result. A public, permanent ledger is the wrong place for
+// compliance data tied to real people and real assets (conflicts with
+// data-deletion rights like GDPR, and leaks which assets a platform is
+// processing to anyone reading the chain). The full report stays in the
+// access-controlled backend/PDF. Anyone holding a copy of the real report
+// can verify it's authentic by re-hashing it and comparing to the
+// on-chain commitment - same trust guarantee, zero data exposed publicly.
 //
 // Access control: record_check can only be called by the account that
-// installed this contract (checked via runtime::get_caller() against a
-// stored owner AccountHash). Without this, anyone could write fake
-// "compliance records" referencing your asset hashes - a real flaw in the
-// earlier fully-public-write version.
+// installed this contract (checked via runtime::get_caller()).
 //
-// HONESTY NOTE: same as before - I don't have a Rust/wasm toolchain to test
-// this myself. Access-control pattern (storing/checking an owner
-// AccountHash via runtime::get_caller()) follows Casper's standard
-// documented pattern for permissioned entry points. If the CI build
-// surfaces an error, paste it and we fix it from real data.
+// API NOTE (found via a real build attempt, 2026-07-04): casper-types 5.0.1
+// has moved to Casper's newer "addressable entity" model. Casper's own
+// docs.casper.network tutorial (as of writing) still shows the OLDER
+// pattern (contracts::EntryPoint, EntryPointType::Contract, 5-arg
+// EntryPoint::new) - that pattern does NOT compile against the actually
+// published casper-types 5.0.1. This file follows the CURRENT, real,
+// working pattern instead, taken directly from
+// github.com/casper-ecosystem/counter/blob/master/contract-v1/src/main.rs:
+//   - EntryPoint is imported as `addressable_entity::EntityEntryPoint`
+//   - EntryPointType::Called replaces EntryPointType::Contract
+//   - EntryPoint::new() takes a 6th argument, EntryPointPayment::Caller
+//
+// HONESTY NOTE: still unable to run this build myself. This round's fix is
+// grounded in an actual working reference file (not a guess), so confidence
+// is higher than earlier rounds - but if the CI still errors, paste the
+// exact text and we fix it from there, same as every round so far.
 
 #![no_std]
 #![no_main]
@@ -39,7 +38,7 @@
 extern crate alloc;
 
 use alloc::string::{String, ToString};
-use alloc::vec;
+use alloc::vec::Vec;
 
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
@@ -51,9 +50,9 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 
 use casper_contract::contract_api::{runtime, storage};
 use casper_contract::unwrap_or_revert::UnwrapOrRevert;
-use casper_types::contracts::EntryPoint;
 use casper_types::{
-    ApiError, CLType, CLValue, EntryPointAccess, EntryPointType, EntryPoints, Parameter,
+    ApiError, CLType, CLValue, EntityEntryPoint as EntryPoint, EntryPointAccess,
+    EntryPointPayment, EntryPointType, EntryPoints, Parameter,
 };
 
 const DICT_TIMESTAMPS: &str = "timestamps";
@@ -72,9 +71,6 @@ const CONTRACT_PACKAGE_NAME: &str = "compliance_registry_package";
 const CONTRACT_ACCESS_UREF: &str = "compliance_registry_access";
 const CONTRACT_KEY: &str = "compliance_registry_contract";
 
-// Custom revert code for "caller isn't the authorized checker" - shows up
-// as ApiError::User(1) if this ever gets hit, distinguishing it from other
-// failure modes.
 const ERROR_NOT_AUTHORIZED: u16 = 1;
 
 fn get_or_create_dict(name: &str) -> casper_types::URef {
@@ -156,34 +152,38 @@ pub extern "C" fn call() {
 
     entry_points.add_entry_point(EntryPoint::new(
         ENTRY_POINT_RECORD_CHECK,
-        vec![Parameter::new(ARG_REPORT_HASH, CLType::String)],
+        Vec::from([Parameter::new(ARG_REPORT_HASH, CLType::String)]),
         CLType::Unit,
-        EntryPointAccess::Public, // access is enforced INSIDE record_check via assert_caller_is_owner(), not at the entry-point level - Casper's own group-based access control is an alternative but this keeps the design simple and auditable in one place
-        EntryPointType::Contract,
+        EntryPointAccess::Public,
+        EntryPointType::Called,
+        EntryPointPayment::Caller,
     ));
 
     entry_points.add_entry_point(EntryPoint::new(
         ENTRY_POINT_GET_TIMESTAMP,
-        vec![Parameter::new(ARG_REPORT_HASH, CLType::String)],
+        Vec::from([Parameter::new(ARG_REPORT_HASH, CLType::String)]),
         CLType::U64,
         EntryPointAccess::Public,
-        EntryPointType::Contract,
+        EntryPointType::Called,
+        EntryPointPayment::Caller,
     ));
 
     entry_points.add_entry_point(EntryPoint::new(
         ENTRY_POINT_GET_CHECKER,
-        vec![Parameter::new(ARG_REPORT_HASH, CLType::String)],
+        Vec::from([Parameter::new(ARG_REPORT_HASH, CLType::String)]),
         CLType::String,
         EntryPointAccess::Public,
-        EntryPointType::Contract,
+        EntryPointType::Called,
+        EntryPointPayment::Caller,
     ));
 
     entry_points.add_entry_point(EntryPoint::new(
         ENTRY_POINT_TOTAL_CHECKS,
-        vec![],
+        Vec::new(),
         CLType::U32,
         EntryPointAccess::Public,
-        EntryPointType::Contract,
+        EntryPointType::Called,
+        EntryPointPayment::Caller,
     ));
 
     let (contract_hash, _contract_version) = storage::new_contract(
@@ -194,7 +194,6 @@ pub extern "C" fn call() {
         None,
     );
 
-    // Record the deploying account as the sole authorized checker.
     let owner = runtime::get_caller().to_string();
     let owner_uref = storage::new_uref(owner);
     runtime::put_key(KEY_OWNER, owner_uref.into());
