@@ -6,8 +6,7 @@ Two AI agents run on a phone, cross-check each other, and anchor the
 result on Casper Testnet - producing a proof anyone can independently
 verify, instead of a private PDF you have to take on trust.
 
-**[Watch the demo video](#)** - *(add your video link here before
-submitting)*
+**[Watch the demo video](#)** - *https://youtu.be/MlmdSoPPYqs?si=RTen6slM-JSyohR8*
 
 ---
 
@@ -134,5 +133,5 @@ npm start
 ## Buildathon links
 
 - Repo: https://github.com/obednc-glitch/casper-edgeguard
-- Demo video: *(add link before submitting)*
-- DoraHacks submission: *(add link before submitting)*
+- Demo video: *https://youtu.be/MlmdSoPPYqs?si=RTen6slM-JSyohR8*
+- DoraHacks submission: *https://dorahacks.io/buidl/46802*
