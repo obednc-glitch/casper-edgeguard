@@ -54,7 +54,7 @@ use casper_contract::contract_api::{runtime, storage};
 use casper_contract::unwrap_or_revert::UnwrapOrRevert;
 use casper_types::{
     ApiError, CLType, CLValue, EntityEntryPoint as EntryPoint, EntryPointAccess,
-    EntryPointPayment, EntryPointType, EntryPoints, Parameter,
+    EntryPointPayment, EntryPointType, EntryPoints, NamedKeys, Parameter,
 };
 
 const DICT_TIMESTAMPS: &str = "timestamps";
@@ -196,7 +196,7 @@ pub extern "C" fn call() {
 
     let (contract_hash, _contract_version) = storage::new_contract(
         entry_points,
-        Some(contract_named_keys),
+        Some(NamedKeys::from(contract_named_keys)),
         Some(CONTRACT_PACKAGE_NAME.to_string()),
         Some(CONTRACT_ACCESS_UREF.to_string()),
         None,
