@@ -39,6 +39,8 @@ extern crate alloc;
 
 use alloc::string::{String, ToString};
 use alloc::vec::Vec;
+use alloc::collections::BTreeMap;
+use casper_types::Key;
 
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
@@ -186,17 +188,19 @@ pub extern "C" fn call() {
         EntryPointPayment::Caller,
     ));
 
+    let owner = runtime::get_caller().to_string();
+    let owner_uref = storage::new_uref(owner);
+
+    let mut contract_named_keys: BTreeMap<String, Key> = BTreeMap::new();
+    contract_named_keys.insert(KEY_OWNER.to_string(), owner_uref.into());
+
     let (contract_hash, _contract_version) = storage::new_contract(
         entry_points,
-        None,
+        Some(contract_named_keys),
         Some(CONTRACT_PACKAGE_NAME.to_string()),
         Some(CONTRACT_ACCESS_UREF.to_string()),
         None,
     );
-
-    let owner = runtime::get_caller().to_string();
-    let owner_uref = storage::new_uref(owner);
-    runtime::put_key(KEY_OWNER, owner_uref.into());
 
     runtime::put_key(CONTRACT_KEY, contract_hash.into());
 }
