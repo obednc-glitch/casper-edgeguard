@@ -22,7 +22,7 @@ jobs:
       - name: Build
         run: |
           cd contracts/compliance-registry-raw
-          cargo build --release --target wasm32-unknown-unknown
+          cargo build -v --release --target wasm32-unknown-unknown
 
       - name: Locate and collect compiled WASM
         run: |
